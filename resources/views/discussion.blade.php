@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('includes.error')
             <div class="card">
                 <div class="card-header text-center"> Create a new Discussion</div>
                 <div class="card-body">

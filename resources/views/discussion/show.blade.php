@@ -8,9 +8,9 @@
                 <span> <b>Created by :</b> {{$discussion->user->name}} <b>({{$discussion->user->points}})</b>
                 </span>
                 @if($discussion->is_watched_by_auth_user())
-                <a href="{{route('discussion.unwatch',['id'=>$discussion->id])}}"><span class="btn btn-md btn-primary float-right">UnWatch</span></a>
+                <a href="{{route('discussion.unwatch',['id'=>$discussion->id])}}"><span class="badge badge-primary float-right">UnWatch</span></a>
                 @else
-                  <a href="{{route('discussion.watch',['id'=>$discussion->id])}}"><span class="btn btn-md btn-primary float-right">Watch</span></a>
+                  <a href="{{route('discussion.watch',['id'=>$discussion->id])}}"><span class="badge badge-primary float-right">Watch</span></a>
                 @endif
                 </div>
 
@@ -23,16 +23,16 @@
                 	{{ $discussion->content }}
 
                     @if(isset($reply_best))
-                    <hr> <br>
+                    <hr> 
                     <div class="text-center">
-                      Best Answer
+                     <b>Best Answer</b> 
                     </div>
                    
                     @if($reply_best->best_answer)
-                    <div class="card">
+                    <div class="card text-white bg-success mb-3">
                       <div class="card-header card-primary">
                         <div class="text-center">
-                          {{$reply_best->user->points}}
+                          <b>By : </b>{{$reply_best->user->name}}<b> ({{$reply_best->user->points}})</b>
                           
                         </div>
                       </div>
@@ -60,9 +60,9 @@
                   &nbsp;&nbsp;
               <span> <b>Created by :</b> {{$reply->user->name}} <b>({{$reply->user->points}})</b></span>
                  @if(!isset($reply_best))
-                 
+                 @if(Auth::id() == $reply->user->id)
                 <a href="{{route('reply.best.answer',['id'=>$reply->id])}}" class="badge badge-primary float-right">Mark as best answer</a>
-                
+                @endif
                 @endif
                 </div>
                 <div class="card-body">
@@ -70,10 +70,11 @@
                 </div>
                 <div class="card-footer">
                 	@if($reply->is_liked_by_auth_user())
-                	 <a href="{{route('reply.unlike',['id'=>$reply->id])}}" class="btn btn-danger btn-xs">Unlike <span class="badge badge-light">{{$reply->likes->count()}}</span></a>
+                	 <a href="{{route('reply.unlike',['id'=>$reply->id])}}" class="badge badge-danger">Unlike <span class="badge badge-light">{{$reply->likes->count()}}</span></a>
                    @else
 
-                   <a href="{{route('reply.like',['id'=>$reply->id])}}" class="btn btn-primary btn-xs">Like <span class="badge badge-light">{{$reply->likes->count()}}</span></a>
+                   <a href="{{route('reply.like',['id'=>$reply->id])}}" class="badge badge-
+                    ">Like <span class="badge badge-light">{{$reply->likes->count()}}</span></a>
                      
                    @endif
                 </div>

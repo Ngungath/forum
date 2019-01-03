@@ -44,4 +44,20 @@ class Discussion extends Model
         return false;
       }
     }
+
+    public function hasBestAnswer(){
+        // $discussion = Discussion::all();
+
+        $best_answer =false;
+
+        foreach ($this->replies as $reply) {
+            
+            if ($reply->best_answer) {
+                
+                $best_answer = true;
+                break;
+            }
+        }
+        return $best_answer;
+    }
 }

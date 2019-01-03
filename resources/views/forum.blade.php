@@ -7,7 +7,16 @@
                   &nbsp;&nbsp;
 
                 <span> <b>Created by :</b> {{$discussion->user->name}} <b>,At : </b>{{$discussion->created_at->diffForHumans()}}</span>
-                <a href="{{route('discussion.show',['slug'=>$discussion->slug])}}"><span class="btn btn-md btn-primary float-right">View</span></a>
+                <a href="{{route('discussion.show',['slug'=>$discussion->slug])}}">
+                    <span class="badge badge-primary float-right">View</span></a> 
+
+                    @if($discussion->hasBestAnswer())
+                    <span class="badge badge-success float-right"  style="margin-right:10px;">CLOSED</span>
+                    @else
+                    <span class="badge badge-warning float-right"  style="margin-right:10px;">OPEN</span>
+                    @endif
+
+                   
                 </div>
 
                 <div class="card-body">
@@ -20,7 +29,7 @@
                 </div>
                 <div class="card-footer">
                     {{$discussion->replies->count()}} Replies
-                    <span class="float-right" ><a href="" class="btn btn-primary">{{$discussion->channel->title}}</a></span>
+                    <span class="float-right" ><a href="" class="badge badge-primary">{{$discussion->channel->title}}</a></span>
                 </div>
             </div>
             <br>

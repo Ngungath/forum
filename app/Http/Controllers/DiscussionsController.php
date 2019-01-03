@@ -16,6 +16,7 @@ class DiscussionsController extends Controller
 	public function index(){
 		$discussion = Discussion::all()->paginate(3);
        return view('discussion.index',['discussion'=>$discussion]);
+      
      
 	}
 
@@ -64,7 +65,11 @@ class DiscussionsController extends Controller
 
     	]);
       
+        $reply->user->points +=25;
 
+
+
+       $reply->user->save();
 
         $watchers = array();
 
@@ -81,4 +86,7 @@ class DiscussionsController extends Controller
     	//route('discussion.show',['slug'=>$discussion->slug]);
 
     }
+
+
+    
 }
