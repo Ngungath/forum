@@ -48,7 +48,7 @@ class DiscussionsController extends Controller
 
     	$discussion = Discussion::where('slug',$slug)->first();
         $reply_best = $discussion->replies()->where('best_answer',1)->first();
-       dd($reply_best->best_answer);
+       // dd($reply_best);
 
     	return view('discussion.show')->with('discussion',$discussion)->with('reply_best',$reply_best);
     }

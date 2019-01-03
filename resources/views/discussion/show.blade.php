@@ -21,11 +21,13 @@
                     <hr>
 
                 	{{ $discussion->content }}
-                    
+
+                    @if(isset($reply_best))
                     <hr> <br>
                     <div class="text-center">
                       Best Answer
                     </div>
+                   
                     @if($reply_best->best_answer)
                     <div class="card">
                       <div class="card-header card-primary">
@@ -38,6 +40,7 @@
                             {{$reply_best->content}}                            
                           </div>                      
                     </div>
+                    @endif
                     @endif
                     
                 </div>
@@ -56,8 +59,10 @@
      <div class="card-header"><img src="{{asset('/uploads/avatar').'/'.$reply->user->avatar}}" style="width: 40px; height: 40px;">
                   &nbsp;&nbsp;
               <span> <b>Created by :</b> {{$reply->user->name}} <b>({{$reply->user->points}})</b></span>
-                 @if(!$reply_best->best_answer)
+                 @if(!isset($reply_best))
+                 
                 <a href="{{route('reply.best.answer',['id'=>$reply->id])}}" class="badge badge-primary float-right">Mark as best answer</a>
+                
                 @endif
                 </div>
                 <div class="card-body">
