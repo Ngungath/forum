@@ -10,6 +10,13 @@ use App\Discussion;
 
 class ChannelsController extends Controller
 {
+
+    public function __construct(){
+
+        $this->middleware('admin');
+
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +24,10 @@ class ChannelsController extends Controller
      */
     public function index()
     {
-        $channels = Channel::all();
-        return view('channels.index')->with('channels', $channels);
+        $channels = Channel::where('active',1)->get();
+
+        
+        return view('channels.index',['channels', $channels]);
     }
 
     /**

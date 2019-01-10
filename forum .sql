@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2019 at 10:20 AM
+-- Generation Time: Jan 10, 2019 at 02:19 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -32,6 +32,7 @@ CREATE TABLE `channels` (
   `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -40,12 +41,12 @@ CREATE TABLE `channels` (
 -- Dumping data for table `channels`
 --
 
-INSERT INTO `channels` (`id`, `title`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 'Laravel 5.6', 'laravel-56', '2018-12-30 17:31:54', '2018-12-30 17:31:54'),
-(2, 'Wordpress', 'wordpress', '2018-12-30 17:31:54', '2018-12-30 17:31:54'),
-(3, 'Vue JS', 'vue-js', '2018-12-30 17:31:54', '2018-12-30 17:31:54'),
-(4, 'Angular JS', 'angular-js', '2018-12-30 17:31:54', '2018-12-30 17:31:54'),
-(5, 'Mongo DB', 'mongo-db', '2018-12-30 17:31:54', '2018-12-30 17:31:54');
+INSERT INTO `channels` (`id`, `title`, `slug`, `active`, `created_at`, `updated_at`) VALUES
+(1, 'Laravel 5.6', 'laravel-56', 1, '2019-01-10 10:18:19', '2019-01-10 10:18:19'),
+(2, 'Wordpress', 'wordpress', 1, '2019-01-10 10:18:19', '2019-01-10 10:18:19'),
+(3, 'Vue JS', 'vue-js', 1, '2019-01-10 10:18:19', '2019-01-10 10:18:19'),
+(4, 'Angular JS', 'angular-js', 1, '2019-01-10 10:18:19', '2019-01-10 10:18:19'),
+(5, 'Mongo DB', 'mongo-db', 1, '2019-01-10 10:18:20', '2019-01-10 10:18:20');
 
 -- --------------------------------------------------------
 
@@ -69,10 +70,10 @@ CREATE TABLE `discussions` (
 --
 
 INSERT INTO `discussions` (`id`, `title`, `content`, `slug`, `user_id`, `channel_id`, `created_at`, `updated_at`) VALUES
-(1, 'Wordress Plugin Development', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'wordress-plugin-development', 2, 1, '2018-12-30 17:31:54', '2018-12-30 17:31:54'),
-(2, 'Laravel  Rest API Development', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'laravel-rest-api-development', 1, 3, '2018-12-30 17:31:54', '2018-12-30 17:31:54'),
-(3, 'Blogger Plugin Development', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'blogger-plugin-development', 2, 2, '2018-12-30 17:31:55', '2018-12-30 17:31:55'),
-(4, 'Jquery Front end Development', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'jquery-front-end-development', 1, 4, '2018-12-30 17:31:55', '2018-12-30 17:31:55');
+(1, 'Wordress Plugin Development', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'wordress-plugin-development', 2, 1, '2019-01-10 10:18:20', '2019-01-10 10:18:20'),
+(2, 'Laravel  Rest API Development', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'laravel-rest-api-development', 1, 3, '2019-01-10 10:18:20', '2019-01-10 10:18:20'),
+(3, 'Blogger Plugin Development', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'blogger-plugin-development', 2, 2, '2019-01-10 10:18:20', '2019-01-10 10:18:20'),
+(4, 'Jquery Front end Development', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'jquery-front-end-development', 1, 4, '2019-01-10 10:18:20', '2019-01-10 10:18:20');
 
 -- --------------------------------------------------------
 
@@ -105,13 +106,13 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(56, '2014_10_12_000000_create_users_table', 1),
-(57, '2014_10_12_100000_create_password_resets_table', 1),
-(58, '2018_12_23_061722_create_discussions_table', 1),
-(59, '2018_12_23_061748_create_replays_table', 1),
-(60, '2018_12_23_081531_create_channels_table', 1),
-(61, '2018_12_26_081220_create_likes_table', 1),
-(62, '2018_12_30_052232_create_watchers_table', 1);
+(63, '2014_10_12_000000_create_users_table', 1),
+(64, '2014_10_12_100000_create_password_resets_table', 1),
+(65, '2018_12_23_061722_create_discussions_table', 1),
+(66, '2018_12_23_061748_create_replays_table', 1),
+(67, '2018_12_23_081531_create_channels_table', 1),
+(68, '2018_12_26_081220_create_likes_table', 1),
+(69, '2018_12_30_052232_create_watchers_table', 1);
 
 -- --------------------------------------------------------
 
@@ -146,10 +147,10 @@ CREATE TABLE `replays` (
 --
 
 INSERT INTO `replays` (`id`, `content`, `best_answer`, `user_id`, `discussion_id`, `created_at`, `updated_at`) VALUES
-(1, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.', 1, 1, 1, '2018-12-30 17:31:55', '2018-12-30 17:31:55'),
-(2, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.', 0, 1, 2, '2018-12-30 17:31:55', '2018-12-30 17:31:55'),
-(3, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.', 0, 2, 3, '2018-12-30 17:31:55', '2018-12-30 17:31:55'),
-(4, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.', 0, 2, 4, '2018-12-30 17:31:55', '2018-12-30 17:31:55');
+(1, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.', 0, 1, 1, '2019-01-10 10:18:20', '2019-01-10 10:18:20'),
+(2, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.', 0, 1, 2, '2019-01-10 10:18:20', '2019-01-10 10:18:20'),
+(3, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.', 0, 2, 3, '2019-01-10 10:18:20', '2019-01-10 10:18:20'),
+(4, 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.', 0, 2, 4, '2019-01-10 10:18:20', '2019-01-10 10:18:20');
 
 -- --------------------------------------------------------
 
@@ -176,8 +177,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `avatar`, `admin`, `points`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Daniel Ngungath', 'daniel2ngungath@gmail.com', '1.jpg', 1, 50, NULL, '$2y$10$4VcOuRXmi44l6A9H00Ilk.aF6OLLescO/hEvBMrC4vASks2BfViiq', NULL, '2018-12-30 17:31:54', '2018-12-30 17:31:54'),
-(2, 'Ayubu Sukurieti', 'ayubu@gmail.com', '1.jpg', 0, 50, NULL, '$2y$10$Xmn6nxz9mpBbbz5Tr2jkTuorMNJ.9zFtBQk7fK28U/5M./bJF/.xG', NULL, '2018-12-30 17:31:54', '2018-12-30 17:31:54');
+(1, 'Daniel Ngungath', 'daniel2ngungath@gmail.com', '1.jpg', 1, 50, NULL, '$2y$10$AlD6LQ2mMNCwMR93EUuQp.R7kzhL6cSh8eNDdQParjEDwSHQOs6E6', NULL, '2019-01-10 10:18:19', '2019-01-10 10:18:19'),
+(2, 'Ayubu Sukurieti', 'ayubu@gmail.com', '1.jpg', 0, 50, NULL, '$2y$10$fljvqB/yJhx6w7PEgJl08ef5OvGJLBVXImEYPQlFa.5j.SVdmeLT2', NULL, '2019-01-10 10:18:19', '2019-01-10 10:18:19');
 
 -- --------------------------------------------------------
 
@@ -272,7 +273,7 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `replays`

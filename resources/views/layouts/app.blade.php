@@ -91,7 +91,19 @@
                 </ul>
                 </div>
                 </div>
-
+                <br>
+                
+                @if(Auth::check())
+                @if(Auth::user()->admin)
+                <div class="card">
+                <div class="card-body">
+                <ul class="list-group">
+                 <li class="list-group-item"><a href="/channels">All channels</a> </li>
+                </ul>
+                </div>
+                </div>
+                 @endif
+                 @endif
                 <br>
                 <div class="card">
                   <div class="card-header">Channels</div>

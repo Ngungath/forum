@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Channels
+                <div class="card-header">All Channels
                
-<span class="pull-left"><a href="{{route('channels.create')}}"><button class="btn btn-primary btn-sm">New Channel</button></a></span>
+<span class="pull-left"><a href="{{route('channels.create')}}"><button class="btn btn-primary btn-sm float-right">New Channel</button></a></span>
                 </div>
 
                 <div class="card-body">
