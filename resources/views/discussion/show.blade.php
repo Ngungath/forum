@@ -2,16 +2,37 @@
 
 @section('content')
             <div class="card">
-            <div class="card-header"><img src="{{asset('/uploads/avatar').'/'.$discussion->user->avatar}}" style="width: 40px; height: 40px;">
+
+                <div class="card-header"><img src="{{asset('/uploads/avatar').'/'.$discussion->user->avatar}}" style="width: 40px; height: 40px;">
                   &nbsp;&nbsp;
 
-                <span> <b>Created by :</b> {{$discussion->user->name}} <b>({{$discussion->user->points}})</b>
-                </span>
-                @if($discussion->is_watched_by_auth_user())
-                <a href="{{route('discussion.unwatch',['id'=>$discussion->id])}}"><span class="badge badge-primary float-right">UnWatch</span></a>
-                @else
-                  <a href="{{route('discussion.watch',['id'=>$discussion->id])}}"><span class="badge badge-primary float-right">Watch</span></a>
-                @endif
+                <span> <b>Created by :</b> {{$discussion->user->name}} <b>,At : </b>{{$discussion->created_at->diffForHumans()}}</span>
+                <a href="{{route('discussion.show',['slug'=>$discussion->slug])}}">
+                    <span class="badge badge-primary float-right">View</span></a> 
+
+                    @if($discussion->hasBestAnswer())
+                    <span class="badge badge-success float-right"  style="margin-right:10px;">CLOSED</span>
+                    @else
+                    <span class="badge badge-warning float-right"  style="margin-right:10px;">OPEN</span>
+                    @endif
+
+                    @if(!$discussion->is_watched_by_auth_user())
+                     <a href="{{route('discussion.watch',['id'=>$discussion->id])}}">
+                    <span class="badge badge-primary float-right" style="margin-right:10px;">Watch</span></a>
+                    @else
+                    <a href="{{route('discussion.unwatch',['id'=>$discussion->id])}}">
+                    <span class="badge badge-danger float-right" style="margin-right:10px;">UnWatch</span></a>
+                    @endif
+
+                    @if(Auth::id() == $discussion->user_id)
+                    @if(!$discussion->hasBestAnswer())
+
+                   <a href="{{route('discussion.edit',['slug'=>$discussion->slug])}}">
+                    <span class="badge badge-info float-right" style="margin-right:10px; color: white;">Edit</span></a>
+                    @endif
+                    @endif
+
+                   
                 </div>
 
                 <div class="card-body">
@@ -62,6 +83,12 @@
                  @if(!isset($reply_best))
                  @if(Auth::id() == $reply->user->id)
                 <a href="{{route('reply.best.answer',['id'=>$reply->id])}}" class="badge badge-primary float-right">Mark as best answer</a>
+                @endif
+                @endif
+               
+                @if(Auth::id() == $reply->user->id)
+                 @if(!$reply->best_answer)
+                <a href="{{route('reply.edit',['id'=>$reply->id])}}" class="badge badge-info float-right" style="color:white;">Edit</a>
                 @endif
                 @endif
                 </div>

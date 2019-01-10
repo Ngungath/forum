@@ -89,5 +89,32 @@ Route::group(['middleware'=>'auth'],function(){
 
    ]);
 
+   //update post routes
+
+   Route::get('/discussion/edit/{slug}',[
+    'uses'=>'DiscussionsController@edit',
+    'as'=>'discussion.edit'
+
+   ]);
+
+  Route::post('/discussion/update/{slug}',[
+    'uses'=>'DiscussionsController@update',
+    'as'=>'discussion.update'
+
+   ]);
+
+  // update reply routes
+   Route::get('/reply/edit/{slug}',[
+    'uses'=>'RepliesController@edit',
+    'as'=>'reply.edit'
+
+   ]);
+
+  Route::post('/reply/update/{slug}',[
+    'uses'=>'RepliesController@update',
+    'as'=>'reply.update'
+
+   ]);
+
 
 });

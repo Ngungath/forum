@@ -16,10 +16,16 @@
                     <span class="badge badge-warning float-right"  style="margin-right:10px;">OPEN</span>
                     @endif
 
-                   
-                </div>
+                    @if(Auth::id() == $discussion->user_id)
+                    @if(!$discussion->hasBestAnswer())
 
-                <div class="card-body">
+                   <a href="{{route('discussion.edit',['slug'=>$discussion->slug])}}">
+                    <span class="badge badge-info float-right" style="margin-right:10px; color: white;">Edit</span></a>
+                    @endif
+                    @endif
+                   </div>
+
+                   <div class="card-body">
                     <h5 class="text-center">
                         <b> {{$discussion->title}}</b>
                     </h5>

@@ -55,4 +55,37 @@ class RepliesController extends Controller
         
 
     }
+
+    public function edit($id){
+
+        $reply = Replay::find($id);
+
+        return view('replies.edit')->with('reply',$reply);
+
+
+    }
+
+
+    public function update($id){
+      
+      $reply = Replay::find($id);
+
+      $this->validate(request(),[
+       
+       'content'=>'required'
+
+      ]);
+
+      $reply->content = request()->content;
+      $reply->save();
+     // dd($reply->discussion->slug);
+
+      Session::flash('success','Replay updated successfully .');
+
+     return redirect()->route('discussion.show',['slug'=>$reply->discussion->slug]);
+
+
+
+
+    }
 }
